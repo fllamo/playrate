@@ -1,0 +1,96 @@
+#logo
+  position: relative
+  bottom: 12px
+
+a, a:link, a:hover, a:visited, a:active
+  text-decoration: none
+
+.main-content
+  // for bootstrap nav
+  // padding-top: 66px <- removed since unfixed top
+
+
+// nav customizations
+.navbar-default
+  z-index: 5
+
+  li.dropdown
+    margin-right: 0px
+
+    .account-icon, .account-icon:active, .account-icon:link, .account-icon:visited, .account-icon:hover
+      background-color: $theme-color1 !important
+      color: #fff !important
+
+
+// subnav
+.subnav
+  background-color: $theme-color-neutral1
+  border-bottom: 1px solid $theme-color-neutral2
+
+  .form-group
+    margin-bottom: 0px
+
+  select
+    background-color: $theme-color-neutral1
+    border-color: $theme-color-neutral2
+
+  .tab-nav
+    ul 
+      list-style-type: none
+      text-align: right
+      margin: 0 0
+
+      li
+        display: inline-block
+        text-transform: uppercase
+
+        a
+          display: block
+          padding: 15px 30px
+          font-size: 1.2em
+          color: lighten($gray-light, 20%)
+
+          &.active
+            color: $text-color
+            border-bottom: 4px solid $theme-color2
+
+          &:hover
+            color: $text-color
+
+
+// utility
+
+.noselect
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+// forms
+.form-inputs
+  .form-group
+    input, select
+      font-size: 1.2em
+      padding: 9px
+      height: 44px
+
+.form-actions
+  text-align: center
+
+// datepicker color scheme
+.datepicker
+  .active.day
+    background: $theme-color1 !important
+    border-color: $theme-color1 !important
+  .active.month
+    background: $theme-color1 !important
+    border-color: $theme-color1 !important
+  .active.year
+    background: $theme-color1 !important
+    border-color: $theme-color1 !important
+
+// alerts
+.alert
+  margin-bottom: 0px

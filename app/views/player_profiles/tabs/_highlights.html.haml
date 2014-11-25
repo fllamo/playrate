@@ -1,0 +1,9 @@
+.user-profile-highlights.container
+
+  .highlight-videos
+    - @player_profile.highlights.each do |highlight|
+      .col-xs-6.highlight-video
+        .embed-responsive.embed-responsive-16by9
+          %iframe.embed-responsive-item{:src => highlight.embed_url}
+        %h4.text-center
+          %em= highlight.title

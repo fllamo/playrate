@@ -1,0 +1,107 @@
+/*********************************************
+/* bootstrap variables
+/*********************************************
+
+$gray-lighter: #d7dbdf
+
+$grid-gutter-width: 40px
+
+$border-radius-small: 0px
+$border-radius-base: 0px
+$border-radius-large: 0px
+
+$font-family-sans-serif: "Open Sans", sans-serif
+
+$brand-primary: $theme-color1
+
+$navbar-height: 66px
+$navbar-default-bg: #242424
+$navbar-default-link-color: #b3b3b3
+$navbar-default-link-hover-color: #fff
+
+$input-border: #afb1c8
+$input-color-placeholder: #afb1c8
+$input-border-radius: 3px
+
+$btn-primary-bg: $theme-color2
+$btn-font-weight: 600
+
+$label-default-bg: $theme-color3
+
+// prevent the nav from collapsing
+$grid-float-breakpoint: 0px
+
+/*********************************************
+@import "bootstrap"
+
+
+/*********************************************
+/* overrides
+/*********************************************
+
+.container
+  width: 1100px !important
+
+.main-content, .navbar
+  min-width: 1100px !important
+  margin-bottom: 0px
+
+.navbar-default
+  -moz-box-shadow:    0px 0px 6px 2px #cbcbcb
+  -webkit-box-shadow: 0px 0px 6px 2px #cbcbcb
+  box-shadow:         0px 0px 6px 2px #cbcbcb
+
+  border-bottom: 0px
+
+  text-transform: uppercase
+  font-size: 1.15em
+  color: #fff
+
+  li
+    margin-left: 10px
+    margin-right: 10px
+
+    a
+      padding-left: 20px
+      padding-right: 20px
+
+.btn
+  text-transform: uppercase
+
+
+.modal-header
+  border-bottom: none
+  h4
+    text-align: center
+
+.form-inline
+  label
+    margin-right: 20px
+
+// http://stackoverflow.com/questions/23204785/creating-a-foundation-style-block-grid-in-bootstrap-3
+
+[class*="block-grid-"]
+  display: block
+  padding: 0
+  margin: 0 -0.55556rem
+  > li
+    display: block
+    height: auto
+    float: left
+    padding: 0 0.55556rem 1.11111rem
+
+.small-block-grid-3 > li
+  width: 33.33333%
+  list-style: none
+  &:nth-of-type(1n)
+    clear: none
+  &:nth-of-type(3n+1)
+    clear: both
+
+.small-block-grid-4 > li
+  width: 25%
+  list-style: none
+  &:nth-of-type(1n)
+    clear: none
+  &:nth-of-type(4n+1)
+    clear: both

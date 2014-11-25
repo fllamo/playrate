@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    = yield :seo
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+
+  %body
+    = render 'layouts/nav'
+    .main-content
+      - if flash[:alert]
+        .alert.alert-danger{role: 'alert'}
+          .container
+            = flash[:alert]
+      - elsif flash[:notice]
+        .alert.alert-success{role: 'alert'}
+          .container
+            = flash[:notice]
+      = yield

@@ -1,0 +1,66 @@
+.user-registration-teams
+  %h2 Add Your Teams
+
+  #teams.row
+    = render partial: 'teams/team', collection: @player_profile.teams
+
+    .col-xs-6
+      %a.add-team{"data-target" => "#teamModal", "data-toggle" => "modal"}
+        %span.glyphicon.glyphicon-plus
+        %h4 Add New Team
+
+  %hr
+
+  = simple_nested_form_for @player_profile do |f|
+    = hidden_field_tag :form, params[:form]
+    
+    .row.form-inputs
+
+      .col-xs-4
+        %h2 Add Your Awards
+        = f.simple_fields_for :awards, @player_profile.awards do |award_form|
+          .row
+            .col-xs-8
+              = award_form.input :name, label: false, placeholder: 'Award or Accolade'
+            .col-xs-4
+              = award_form.link_to_remove "Remove"
+        %p= f.link_to_add "Add an award", :awards, class: 'btn btn-primary btn-sm'
+      
+      .col-xs-8
+        %h2 Manage Your Upcoming Games
+        = f.simple_fields_for :games, @player_profile.games do |game_form|
+          .row
+            .col-xs-4
+              = game_form.input :name, label: false, placeholder: 'Teams playing'
+            .col-xs-3
+              = game_form.input :when, label: false, placeholder: 'Date/Time'
+            .col-xs-3
+              = game_form.input :location, label: false, placeholder: 'Place'
+            .col-xs-2
+              = game_form.link_to_remove "Remove"
+        %p= f.link_to_add "Add a Game", :games, class: 'btn btn-primary btn-sm'
+
+    .row.form-actions
+      = f.button :submit, (@player_profile.complete? ? "Save" : "Next"), class: "btn-primary btn-lg"
+
+/ Modal
+#teamModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+          %span.sr-only Close
+        %h4#myModalLabel.modal-title Add New Team
+      .modal-body
+        = simple_form_for Team.new, data: {remote: true} do |f|
+          .form-inputs
+            = f.input :name, label: false, placeholder: 'Team Name'
+            = f.input :varsity, collection: [['Varsity', true],['Junior Varsity', false]], label: false, prompt: 'Select team type'
+            = f.input :duration, label: false, placeholder: 'Number of years on team'
+            = f.input :jersey_number, label: false, placeholder: 'Jersey Number'
+            = f.input :coach, label: false, placeholder: 'Team Coach'
+            = f.input :coach_email, as: :email, label: false, placeholder: 'Coach Email'
+            = f.input :coach_phone, label: false, placeholder: 'Coach Phone Number'
+          .form-actions
+            = f.button :submit, "Add Team", class: "btn btn-primary"

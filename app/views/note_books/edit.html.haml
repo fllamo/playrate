@@ -1,0 +1,11 @@
+.user-profile
+  = render partial: 'player_profiles/header'
+  .container
+    %br
+    %br
+    .row
+      .col-xs-12
+        = simple_form_for @note_book, url: player_profile_note_book_path do |f|
+          = f.input :status, collection: NoteBook.lead_statuses, prompt: 'Select Lead Status'
+          = f.input :notes, input_html: {rows: 10}
+          = f.submit 'Save', class: 'btn btn-primary'

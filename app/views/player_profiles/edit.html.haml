@@ -1,0 +1,51 @@
+.user-registration
+  // TODO: handle sizing when screen is small
+  // .current and .completed classes denote status
+  .subnav
+    .container
+      %ul.registration-progress
+
+        // TODO: refactor this into helper
+        - if @player_profile.complete?
+
+          %li.registration-step{class: "complete #{'active' if params[:form] == 'account'}"}
+            = link_to edit_player_profile_path(@player_profile, {form: 'account'}) do
+              %span.glyphicon.glyphicon-ok-circle.iconw
+              %span Account Info
+          %li.registration-step{class: "complete #{'active' if params[:form] == 'academics'}"}
+            = link_to edit_player_profile_path(@player_profile, {form: 'academics'}) do
+              %span.glyphicon.glyphicon-ok-circle.icon
+              %span Academic Info
+          %li.registration-step{class: "complete #{'active' if params[:form] == 'stats'}"}
+            = link_to edit_player_profile_path(@player_profile, {form: 'stats'}) do
+              %span.glyphicon.glyphicon-ok-circle.icon
+              %span Sports Stats
+          %li.registration-step{class: "complete #{'active' if params[:form] == 'teams'}"}
+            = link_to edit_player_profile_path(@player_profile, {form: 'teams'}) do
+              %span.glyphicon.glyphicon-ok-circle.icon
+              %span Teams & Awards
+          %li.registration-step{class: "complete #{'active' if params[:form] == 'highlights'}"}
+            = link_to edit_player_profile_path(@player_profile, {form: 'highlights'}) do
+              %span.glyphicon.glyphicon-ok-circle.icon
+              %span Sport Highlights
+
+        - else
+          
+          %li.registration-step{class: (('current' if @player_profile.completion_step == 'account') || ('completed' if @player_profile.account_complete?))}
+            %span.glyphicon.glyphicon-ok-circle.icon
+            %span Account Info
+          %li.registration-step{class: (('current' if @player_profile.completion_step == 'academics') || ('completed' if @player_profile.academics_complete?))}
+            %span.glyphicon.glyphicon-ok-circle.icon
+            %span Academic Info
+          %li.registration-step{class: (('current' if @player_profile.completion_step == 'stats') || ('completed' if @player_profile.stats_complete?))}
+            %span.glyphicon.glyphicon-ok-circle.icon
+            %span Sports Stats
+          %li.registration-step{class: (('current' if @player_profile.completion_step == 'teams') || ('completed' if @player_profile.teams_complete?))}
+            %span.glyphicon.glyphicon-ok-circle.icon
+            %span Teams & Awards
+          %li.registration-step{class: (('current' if @player_profile.completion_step == 'highlights') || ('completed' if @player_profile.highlights_complete?))}
+            %span.glyphicon.glyphicon-ok-circle.icon
+            %span Sport Highlights
+
+  .container
+    = render partial: "player_profiles/form/#{@player_profile.completion_step || params[:form] }"

@@ -1,0 +1,15 @@
+%h2
+  Enter Your Academic Information
+
+= simple_form_for @player_profile do |f|
+  = hidden_field_tag :form, params[:form]
+  .row.form-inputs
+    .col-xs-6
+      = f.input :graduation_year, placeholder: 'Graduation Year'
+    - PlayerProfile.academic_stats_fields.each do |asf|
+      .col-xs-6
+        = stat_input(f, asf, true)
+
+  .row.form-actions
+    = f.button :submit, (@player_profile.complete? ? "Save" : "Next"), class: "btn-primary btn-lg"
+    

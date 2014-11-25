@@ -1,0 +1,56 @@
+.subnav
+  .container
+    .row.profile-summary
+      .col-xs-6.profile-info
+        .panel.panel-default
+          .panel-body
+            = image_tag @player_profile.user.gravatar, class: 'profile-picture'
+
+            .info
+              %span.name= @player_profile.user.name
+
+              - if @recruiter_status.present?
+                %span.label.label-default= @recruiter_status
+
+              %span.location #{@player_profile.city}, #{@player_profile.state}
+
+            .positions
+              .position
+                .section
+                  %span Sport:
+                  #{@player_profile.sport.name}
+                .section
+                  %span Position:
+                  #{@player_profile.position.name}
+                .section
+                  %span Other sports:
+                  = @player_profile.other_sports
+
+      .col-xs-6
+        - if current_user.is_recruiter?
+          .panel.panel-default
+            .panel-heading
+              Control Panel
+            .panel-body
+              = link_to 'Messages', show_conversations_path(profile: @player_profile.to_param)
+              |
+              = link_to 'Edit Notes', player_profile_note_book_edit_path(@player_profile)
+        - elsif current_user.is_player?
+          .panel.panel-default
+            .panel-heading
+              Control Panel
+            .panel-body
+              = link_to 'Edit Profile', edit_player_profile_path(@player_profile)
+              |
+              = link_to 'Submit Profile to Colleges', schools_path
+        %br
+        .panel.panel-default.nav-panel
+          .panel-body
+            %span.view Browse:
+            %ul.nav.nav-pills.nav-sm
+              %li{class: ('active' if params[:show] == 'about')}
+                = link_to 'About', player_profile_path(@player_profile, {show: 'about'})
+              %li{class: ('active' if params[:show] == 'stats')}
+                = link_to 'Stats', player_profile_path(@player_profile, {show: 'stats'})
+              %li{class: ('active' if params[:show] == 'highlights')}
+                = link_to 'Highlights', player_profile_path(@player_profile, {show: 'highlights'})

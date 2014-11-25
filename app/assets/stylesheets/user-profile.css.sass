@@ -1,0 +1,197 @@
+.user-profile
+  // --------------------------------------------------------------------------------------------
+  // common
+  // --------------------------------------------------------------------------------------------
+  .subnav
+    .profile-summary
+      margin-top: 35px
+      margin-bottom: 35px
+
+      .panel
+        margin-bottom: 0px
+
+        &.nav-panel
+          .panel-body
+            padding-top: 12px
+            padding-bottom: 6px
+
+            span.view
+              position: relative
+              bottom: 7px
+              margin-right: 10px
+
+            .nav-pills.nav-sm
+              display: inline-block
+              li a
+                padding: 2px 10px
+
+      img.profile-picture
+        float: left
+        margin-right: 20px
+
+      .info
+        padding-top: 5px
+
+        .name, .label
+          vertical-align: middle
+
+        .name
+          font-weight: 700
+          font-size: 1.5em
+          margin-right: 10px
+
+        .location
+          display: block
+          font-size: 1.25em
+
+      .position
+        display: block
+        padding: 5px 0
+        margin-left: 150px
+
+        .section
+          display: inline-block
+          min-width: 175px
+          span
+            font-weight: 600
+
+      .profile-actions
+        text-align: right
+
+      .rating
+        font-size: 1.5em
+
+        span.number
+          font-size: 2.25em
+          font-weight: 700
+          line-height: 30px
+          color: $theme-color-misc1
+          margin-right: 5px
+          margin-left: 5px
+          // TODO: add red and yellow color classes
+
+        span.points
+          position: relative
+          bottom: 12px
+          font-size: 0.8em
+          font-weight: bold
+
+  #profile-tabs
+    max-width: 440px
+    margin: 0px auto
+
+  table
+    border: 1px solid $gray-lighter
+    margin-top: 50px
+
+    thead
+      td
+        background-color: $theme-color1
+        color: #fff
+        font-size: 1.6em
+        span
+          font-size: 0.8em
+
+    td.value
+      font-weight: 700
+
+  .player-list
+    .glyphicon
+      position: relative
+      top: 3px
+      font-size: 1.2em
+      margin-right: 5px
+
+  // --------------------------------------------------------------------------------------------
+  // about
+  // --------------------------------------------------------------------------------------------
+  .user-profile-about
+    .player-notes
+      background-color: $theme-color-neutral1
+      border: 1px solid $theme-color-neutral2
+      padding: 20px 20px
+      margin: 40px 0
+
+      h4
+        font-weight: 600
+        margin: 0 0 10px 0
+
+    .player-teams
+      margin-bottom: 50px
+
+      .team
+        @extend .clearfix
+        display: block
+        padding: 20px 0px
+
+        .jersey
+          width: 120px
+          height: 176px
+          float: left
+          text-align: center
+          margin-right: 20px
+          background: image-url('jersey.png')
+
+          span
+            font-size: 2.25em
+            font-weight: 700
+            display: block
+            margin-top: 50px
+
+        .information
+          font-size: 1.25em
+          padding-top: 30px
+
+    .player-quotes
+      .quote
+        font-style: italic
+        margin-bottom: 10px
+      .quote-author
+        font-weight: 600
+        margin-bottom: 30px
+        font-size: 1.2em
+
+
+    .player-games, .player-awards
+      width: 47%
+      border: solid 1px $gray-lighter
+      margin-bottom: 20px
+
+      .header
+        font-weight: 600
+        font-size: 1.5em
+        text-align: center
+        padding-top: 10px
+        padding-bottom: 10px
+        border-bottom: solid 1px $gray-lighter
+
+      .game, .award
+        padding: 30px 30px
+        font-size: 1.4em
+
+        span
+          display: inline-block
+          vertical-align: middle
+
+          &.icon
+            font-size: 1.7em
+            margin-right: 20px
+
+          .details
+            display: block
+            font-style: italic
+            font-size: 0.8em
+
+    .player-games
+      float: left
+
+    .player-awards
+      float: right
+
+  // --------------------------------------------------------------------------------------------
+  // highlights
+  // --------------------------------------------------------------------------------------------
+
+  .user-profile-highlights
+    .highlight-video
+      padding: 50px 30px 0 30px

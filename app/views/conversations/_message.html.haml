@@ -1,0 +1,13 @@
+.panel.panel-default
+  .panel-body
+    .media
+      .pull-left
+        %img.media-object{src: "#{current_user.gravatar(50)}"}
+      .media-body
+        %h4.media-heading
+          = message.user.name
+          %small
+            posted
+            = time_ago_in_words(message.created_at)
+            ago
+        = message.formatted_body

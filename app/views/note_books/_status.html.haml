@@ -1,0 +1,2 @@
+- nb = player_profile.note_books.where(recruiter_profile: current_user.profile).first
+= nb && nb.status.present? && content_tag(:span, nb.status, class: 'label label-default') || content_tag(:span, 'No Status', class: 'label label-danger')

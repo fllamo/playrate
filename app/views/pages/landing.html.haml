@@ -1,0 +1,116 @@
+.landing_header.clearfix{style: "background-image: url(#{asset_path('landing/jumbotron-image-'+(1..3).to_a.sample.to_s+'.jpg')})"}
+
+
+  .landing-nav
+    .container
+      = link_to root_path, class: 'navbar-brand' do
+        = image_tag('logo_white_sm.png', id: 'logo')
+     
+      .landing-nav-options
+        // Replace this with action in pages controller that redirects you according to your user type
+        - if current_user
+          = link_to 'Go to my account', pages_account_redirect_path, class: "btn btn-primary"
+        - else
+          = link_to 'Log in', new_user_session_path
+          = link_to 'Sign up', new_user_registration_path, class: "sign_up"
+
+  .container
+
+    %h1
+      College Sports Recruiting. Simplified.
+
+    %h3
+      Some subheader
+
+.container.landing-content
+  %ul.nav.nav-tabs{:role => "tablist"}
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#athletes", :role => "tab"} Playrate for Athletes
+    %li
+      %a{"data-toggle" => "tab", :href => "#recruiters", :role => "tab"} Playrate for Recruiters
+
+  / Tab panes
+  .tab-content
+    #athletes.tab-pane.active
+      .row
+        .col-xs-6
+          %br
+          %br
+          %br
+          %br
+          %h2 Market Yourself
+          %br
+          %p
+            Generate interest with tools to develop a compelling profile including academics, coaching recommendations, all your stats, and video highlights.  Oh, and you can track who views your profile too!
+        .col-xs-6
+          = image_tag('landing/player-profile.png')
+      .row
+        .col-xs-6
+          = image_tag('landing/college-search.png')
+        .col-xs-6
+          %br
+          %br
+          %br
+          %br
+          %h2 Find Schools That Fit You
+          %br
+          %p
+            Our comprehensive program data matches you to schools based on your profile - likely delivering you suggested institutions you may not have even considered!
+      .row
+        .col-xs-6
+          %br
+          %br
+          %br
+          %h2 Manage The Process
+          %br
+          %p
+            One tool.  All your efforts.  Communications with coaches included!
+        .col-xs-6
+          = image_tag('landing/athlete-messages.png')
+
+    #recruiters.tab-pane
+      .row
+        .col-xs-6
+          %br
+          %br
+          %br
+          %br
+          %h2 Recruiting Intelligence
+          %br
+          %p
+            Use custom scoring algorithms to find, assess, and rank student athletes.
+        .col-xs-6
+          = image_tag('landing/create-player-search.png')
+      .row
+        .col-xs-6
+          = image_tag('landing/player-search.png')
+        .col-xs-6
+          %br
+          %br
+          %h2 Increase Your Reach
+          %br
+          %p
+            Erase geographic boundaries by searching our national database of players based on criteria you choose.  Find players, view profiles, recruit!
+      .row
+        .col-xs-6
+          %br
+          %br
+          %br
+          %h2 Manage The Recruiting Process
+          %br
+          %p
+            Communicate with player prospects and track your progress in one system.  Manage your pipeline in simple but incredible detail.
+        .col-xs-6
+          = image_tag('landing/recruiter-dashboard.png')
+
+.landing-call-to-action
+  .container
+    %h1
+      Line telling you to get started
+
+    = link_to 'Get Started', new_user_registration_path, class: "btn btn-primary"
+
+.container.landing-footer
+  All Rights Reserved, Playrate
+  = mail_to 'contact@playrate.me', 'Contact Us'
+

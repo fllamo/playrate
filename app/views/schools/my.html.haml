@@ -1,0 +1,13 @@
+.schools-my
+  .subnav
+    .container
+      .tab-nav.row
+        %ul
+          %li
+            = link_to 'Search Schools', schools_path, class: ('active' if request.path == schools_path) 
+          %li
+            = link_to 'My Schools', my_schools_path, class: ('active' if request.path == my_schools_path)
+
+
+  .container
+    = render @schools

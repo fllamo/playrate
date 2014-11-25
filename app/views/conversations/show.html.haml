@@ -1,0 +1,15 @@
+.user-profile
+  = render partial: 'player_profiles/header'
+.container
+  %br
+  %br
+  .row
+    .col-xs-12
+      - @conversation.messages.where('id IS NOT NULL').each do |message|
+        = render partial: 'message', locals: {message: message}
+      .panel.panel-default
+        .panel-body
+          = simple_form_for @conversation, form_html: {role: 'form'} do |f|
+            = f.simple_fields_for :messages, @conversation.messages.new do |mf|
+              = mf.input :body, label: "Message", input_html: {rows: 8}
+            = f.submit "Send message", class: 'btn btn-primary btn-block'

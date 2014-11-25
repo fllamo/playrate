@@ -1,0 +1,45 @@
+%br
+%br
+.container
+  .row
+    .col-xs-3
+      .panel.panel-default
+        .panel-heading Saved Searches
+        .panel-body
+          - if @searches.empty?
+            %p You have not created any searches yet.
+          - else
+            %ul.nav.nav-pills.nav-stacked
+              - @searches.each do |search|
+                %li{class: ('active' if params[:search_id].to_i == search.id)}
+                  = link_to matches_path({search_id: search.id}) do
+                    = search.name
+                    - if search.matches.unseen.any?
+                      %span.badge.pull-right #{search.matches.unseen.size}
+
+          %hr
+          = link_to new_position_search_path, class: 'btn btn-primary btn-sm' do
+            %i.glyphicon.glyphicon-plus
+            Create new search
+
+    .col-xs-9.search-results
+      .panel.panel-default
+        .panel-heading
+          Results (
+          showing #{@matches && pluralize(@matches.size, 'result') || '0 results'}
+          - if @matches && @matches.any?
+            for a #{@active_search.sport.name}/#{@active_search.position.name} position
+          )
+        .panel-body
+          - if @matches && @matches.any?
+            %table.table.table-striped
+              = render 'matches/thead'
+              = render @matches
+            = link_to 'Remove this saved search', position_search_path(@active_search), method: :delete, data: { confirm: 'Are you sure? This cannot be undone.' }
+          - elsif @matches && @matches.empty?
+            %p No matching submissions found yet.
+            = link_to 'Remove this saved search', position_search_path(@active_search), method: :delete, data: { confirm: 'Are you sure? This cannot be undone.' }
+          - else
+            %p
+              %i.glyphicon.glyphicon-arrow-left
+              &nbsp; Select a saved search to see match results.

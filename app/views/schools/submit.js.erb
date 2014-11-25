@@ -1,0 +1,4 @@
+$('.submit[data-id=<%= @school.id %>]').text('Submitted')
+  .removeClass('btn-primary')
+  .addClass('btn-default')
+  .attr('disabled', 'disabled');

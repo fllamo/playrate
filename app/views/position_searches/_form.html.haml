@@ -1,0 +1,116 @@
+= simple_form_for @position_search do |f|
+  .search-new
+    .subnav
+      .container
+        .col-xs-4
+          = f.input :name, label: false, placeholder: 'Search Name'
+        - if @position_search.position.blank?
+          .col-xs-3
+            = f.input :sport_id, as: :select, collection: Sport.all, label: false, prompt: 'Choose a sport'
+          .col-xs-3
+            - if @position_search.sport.blank?
+              = f.input :position_id, as: :select, collection: [], label: false, prompt: 'Choose a position', input_html: {disabled: true}
+            - else
+              = f.input :position_id, as: :select, collection: Position.where(sport: @position_search.sport), label: false, prompt: 'Choose a position'
+        - else
+          .col-xs-3
+            = f.input :sport_id, as: :select, collection: Sport.all, label: false, prompt: 'Choose a sport', input_html: {disabled: true}
+            = f.input :sport_id, as: :hidden, input_html: {value: @position_search.sport_id}
+          .col-xs-3
+            = f.input :position_id, as: :select, collection: Position.all, label: false, prompt: 'Choose a position', input_html: {disabled: true}
+            = f.input :position_id, as: :hidden, input_html: {value: @position_search.position_id}
+
+        .col-xs-2.reset
+          = f.submit 'Save Search', class: 'btn btn-primary'
+
+    .container.search-form
+      - if @position_search.position_id.present?
+        #stat_fields
+          .row.search-header
+            .title Position Stats
+            .points-remaining
+              %span.points <span id="used_points">#{@position_search.points_remaining}</span>/100
+              %span.description Points Remaining
+
+          .row
+            = f.simple_fields_for :stat_searches, f.object.stat_searches do |ssf|
+              .col-xs-4.search-field
+                = ssf.input :name, as: :hidden, input_html: {value: ssf.object.name}
+                .allocation-header
+                  .points
+                    %span= ssf.object.coefficient
+                    = ssf.input :coefficient, as: :hidden
+                  .title= ssf.object.name
+                  .point-controls.noselect
+                    %span.glyphicon.glyphicon-minus
+                    %span.glyphicon.glyphicon-plus
+                = ssf.simple_fields_for :tiers, ssf.object.tiers.sort_by(&:importance) do |tf|
+                  = tf.input :importance, as: :hidden
+                  .allocation-form
+                    .title T#{tf.object.importance}
+                    = tf.input :start_value, label: false, placeholder: 'Min value', input_html: {min: 0}
+
+:javascript
+
+  ////////// Sport Selection //////////
+
+  var $usedPoints;
+
+  $(document).ready(function(){
+    var $sport = $('#position_search_sport_id'),
+        $position = $('#position_search_position_id'),
+        $fields = $('.search-form'),
+        blankPositionOption = $position.html();
+
+    // On sport selection
+    $sport.on('change', function(){
+      var sport = this.value;
+
+      $.get('/positions', {sport_id: this.value}, function(result){
+        var options = blankPositionOption + result;
+        $position.html(options);
+        $position.prop('disabled', false);
+      });
+    });
+
+    // On position selection
+    $position.on('change', function(){
+      var position = this.value;
+      $.get('/position_searches/position_search_form',{
+        position_id: position
+      }, function(result){
+        var form_content = $(result).find('#stat_fields').html();
+        $fields.html(form_content);
+        $usedPoints = $('#used_points');
+      });
+    });
+  });
+
+  ////////// Coefficients //////////
+
+  $(document).ready(function(){
+    $usedPoints = $('#used_points');
+
+    $('.search-form').on('click', '.point-controls span', function(e){
+      e.stopPropagation();
+      var $this = $(this),
+          $pointContainer = $this.closest('.allocation-header').find('.points'),
+          $pointDisplay = $pointContainer.find('span'),
+          $pointInput = $pointContainer.find('input');
+
+      if ($this.hasClass('glyphicon-minus')) {
+        if ($pointInput.val() != '0') {
+          $pointInput.val(parseInt($pointInput.val()) - 1);
+          $usedPoints.text(parseInt($usedPoints.text()) + 1);
+        }
+      } else if ($this.hasClass('glyphicon-plus')) {
+        if (parseInt($usedPoints.text()) > 0) {
+          $pointInput.val(parseInt($pointInput.val()) + 1);
+          $usedPoints.text(parseInt($usedPoints.text()) - 1);
+        }
+      }
+
+      $pointDisplay.text($pointInput.val());
+    });
+
+  });

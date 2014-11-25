@@ -1,0 +1,8 @@
+Hi,
+
+<%= @player_profile.user.name %> has submitted their Playrate profile to <%= @school.name %> for a <%= @player_profile.sport.name %> <%= @player_profile.position.name %> position.<% if @score.present? %> They scored <%= @score %> on a search you created.<% end %> You can view their profile and stats here:
+
+<%= @player_profile_path %>
+
+Let us know if you have any questions!
+The Playrate Team

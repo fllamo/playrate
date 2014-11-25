@@ -1,0 +1,12 @@
+.col-xs-4.school
+  .school-cont
+    .text-center
+      %img{src: root_path + (school.image_uploaded? ? school.image_url : 'schools/default.gif')}
+      .name
+        %h4= school.name
+        = school.location
+      .info
+        - if school.submitted_to_by(current_user.profile)
+          = link_to 'Submitted', '#', class: 'submit btn btn-sm btn-default', disabled: 'disabled'
+        - else
+          = link_to 'Submit my Profile', school_submit_path(school), class: 'submit btn btn-sm btn-primary', remote: true, data: {id: school.id}

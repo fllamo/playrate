@@ -1,0 +1,30 @@
+%h2 Enter Your Account Information
+
+= simple_form_for @player_profile do |f|
+  = hidden_field_tag :form, params[:form]
+  
+  .row.form-inputs
+    .col-xs-6
+      = f.input :phone, label: 'Phone Number', placeholder: 'Phone Number'
+    .col-xs-6
+      = f.input :dob, as: :string, label: 'Date of Birth', placeholder: 'Date of Birth', input_html: {class: 'longdatepicker', value: f.object.dob && f.object.dob.strftime('%Y-%m-%d')}
+    .col-xs-6
+      = f.input :parent_phone, label: 'Parent Phone Number', placeholder: 'Parent Phone Number'
+    .col-xs-6
+      = f.input :parent_email, label: 'Parent Email', placeholder: 'Parent Email'
+    .col-xs-6
+      = f.input :street_address, label: 'Street Address', placeholder: 'Street Address'
+    .col-xs-6
+      = f.input :city, label: 'City', placeholder: 'City'
+    .col-xs-6
+      = f.input :state, label: 'State', placeholder: 'State'
+    .col-xs-6
+      = f.input :zip, label: 'Postal Code', placeholder: 'Postal Code'
+    .col-xs-6
+      = f.input :school, label: 'School', placeholder: 'School'
+    .col-xs-6
+      %label Avatar
+      %p Avatars from <a href="http://en.gravatar.com" target="_blank">Gravatar</a>. You can <a href="http://en.gravatar.com" target="_blank">sign up for one here</a> if you don't already have an account (optional).
+
+  .row.form-actions
+    = f.button :submit, (@player_profile.complete? ? "Save" : "Next"), class: "btn-primary btn-lg"

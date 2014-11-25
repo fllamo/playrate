@@ -1,0 +1,8 @@
+= simple_form_for @player_profile do |f|
+  #stat_fields
+    %h2 Add Your Stats
+    .form-inputs
+      .row
+        - @position.stats.each do |ps|
+          .col-xs-6
+            = stat_input(f, ps)

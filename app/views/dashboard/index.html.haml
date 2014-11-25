@@ -1,0 +1,39 @@
+.container
+  %br
+  %br
+  .row
+    .col-xs-12
+      .panel.panel-default
+        .panel-heading Recent activity with players
+        .panel-body
+          - if @players.any?
+            %table.table.table-striped
+              %thead
+                %tr
+                  %th Name
+                  %th Sport
+                  %th Position
+                  %th Last Activity
+                  %th Status
+                  %th &nbsp
+              %tbody
+                - @players.each do |player|
+                  %tr
+                    %td= player.user.name
+                    %td= player.sport.name
+                    %td= player.position.name
+                    %td
+                      = time_ago_in_words(player.conversations.where(recruiter_profile: current_user.recruiter_profile).first.updated_at)
+                      ago
+                    %td= render partial: 'note_books/status', locals: {player_profile: player}
+                    %td
+                      .pull-right
+                        = link_to player_profile_path(player), class: 'btn btn-success btn-xs' do
+                          .glyphicon.glyphicon-search
+                          Profile
+                        &nbsp;
+                        = link_to show_conversations_path(profile: player.to_param), class: 'btn btn-success btn-xs' do
+                          .glyphicon.glyphicon-envelope
+                          Messages
+          - else
+            %p No activity yet.

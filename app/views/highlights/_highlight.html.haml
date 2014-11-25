@@ -1,0 +1,9 @@
+.col-xs-6.highlight-video{data: {id: highlight.id}}
+  %h4
+    %span Title:
+    = highlight.title
+    .pull-right
+      = link_to 'x', highlight_path(highlight), method: :delete, remote: true
+
+  .embed-responsive.embed-responsive-16by9
+    %iframe.embed-responsive-item{:src => highlight.embed_url}

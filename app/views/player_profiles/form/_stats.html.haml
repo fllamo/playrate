@@ -1,0 +1,70 @@
+= simple_form_for @player_profile do |f|
+  = hidden_field_tag :form, params[:form]
+
+  %h2 Choose Your Sport and Position
+
+  .row.form-inputs
+    - if @player_profile.position_id.blank?
+      .col-xs-6
+        = f.input :sport_id, as: :select, collection: Sport.all, label: false, prompt: 'Choose a sport'
+      .col-xs-6
+        = f.input :position_id, as: :select, collection: [], label: false, prompt: 'Choose a position', input_html: {disabled: true}
+    - else
+      .col-xs-6
+        = f.input :sport_id, as: :select, collection: Sport.all, label: false, prompt: 'Choose a sport', input_html: {disabled: true}
+      .col-xs-6
+        = f.input :position_id, as: :select, collection: Position.all, label: false, prompt: 'Choose a position', input_html: {disabled: true}
+  
+  %br
+  .row.form-inputs
+    .col-xs-12
+      = f.input :other_sports, label: 'Do you play any other sports?', class: 'form-control'
+
+  %hr
+
+  - if @player_profile.position_id.blank?
+    #stats
+  - else
+    #stat_fields
+      %h2 Add Your Stats
+      .form-inputs
+        .row
+          - @player_profile.position.stats.each do |ps|
+            .col-xs-6
+              = stat_input(f, ps)
+
+  .row.form-actions
+    = f.button :submit, (@player_profile.complete? ? "Save" : "Next"), class: "btn-primary btn-lg"
+
+:erb
+  <script>
+    $(document).ready(function(){
+      var $sport = $('#player_profile_sport_id'),
+          $position = $('#player_profile_position_id'),
+          $fields = $('#stats'),
+          blankPositionOption = $position.html();
+
+      // On sport selection
+      $sport.on('change', function(){
+        var sport = this.value;
+
+        $.get('/positions', {sport_id: this.value}, function(result){
+          var options = blankPositionOption + result;
+          $position.html(options);
+          $position.prop('disabled', false);
+        });
+      });
+
+      // On position selection
+      $position.on('change', function(){
+        var position = this.value;
+        $.get('/positions/player_form',{
+          player_profile_id: <%= current_user.player_profile.to_param %>,
+          position_id: position
+        }, function(result){
+          var form_content = $(result).find('#stat_fields').html();
+          $fields.html(form_content);
+        });
+      });
+    });
+  </script>

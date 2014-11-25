@@ -1,0 +1,26 @@
+.container
+  .row
+    .col-xs-6.user-profile-stats
+      %table.table.table-striped
+        %thead
+          %tr
+            %td{colspan: "2"}
+              = @player_profile.sport.name
+              %span - #{@player_profile.position.name}
+        %tbody
+          - @player_profile.stats.order(:name).where(academic: false).each do |stat|
+            %tr
+              %td= stat.name
+              %td.value= "%g" % stat.value
+
+    .col-xs-6.user-profile-academics
+      %table.table.table-striped
+        %thead
+          %tr
+            %td{colspan: "2"}
+              Academics
+        %tbody
+          - @player_profile.stats.order(:name).where(academic: true).each do |stat|
+            %tr
+              %td= stat.name
+              %td.value= "%g" % stat.value

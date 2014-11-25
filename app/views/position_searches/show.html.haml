@@ -1,0 +1,94 @@
+.search-results
+  .subnav
+    .container
+      = simple_form_for :search do |f|
+        %ul.small-block-grid-4
+          %li
+            = f.input :position, as: :select, label: false, prompt: 'Position'
+          %li
+            = f.input :location, as: :select, label: false, prompt: 'Location'
+          %li
+            = f.input :ranking, as: :select, label: false, prompt: 'Ranking'
+          %li
+            = f.input :status, as: :select, label: false, prompt: 'Status'
+
+
+  .container.matching-players
+
+    .player.clearfix
+
+      .col-xs-9.profile-info
+        %img.profile-picture{src: "", width: "130px", height: "130px"}
+
+        .info
+          %span.name Firstname Lastname
+
+          // only show to recruiter view
+          %span.label.label-default Verbal Commit
+
+          %span.location Raleigh, NC
+
+        // for each sport and position list them
+        .positions
+
+          .position
+            .section
+              %span Sport:
+              Lacrosse
+            .section
+              %span Position:
+              Midfield
+
+
+
+      .col-xs-3.profile-actions
+        // .btn.btn-primary Edit Profile <-- show if player view
+
+        // below if recruiter view
+        .btn.btn-primary Manage
+
+        // below if recruiter view
+        .rating
+          %span 94
+          &frasl; 100
+
+
+    .player.clearfix
+
+      .col-xs-9.profile-info
+        %img.profile-picture{src: "", width: "130px", height: "130px"}
+
+        .info
+          %span.name Firstname Lastname
+
+          // only show to recruiter view
+          %span.label.label-default Verbal Commit
+
+          %span.location Raleigh, NC
+
+        // for each sport and position list them
+        .positions
+
+          .position
+            .section
+              %span Sport:
+              Lacrosse
+            .section
+              %span Position:
+              Midfield
+
+        .notes
+          asdfasdf asdfasdf asdfasdf asdfasdf asdfasdf asdfasdf asdfasdf asdfasdfasdfasdf asdfasdf asdfasdf asdfasdfasdfasdf asdfasdf asdfasdf asdfasdfasdfasdf asdfasdf asdfasdf asdfasdfasdfasdf asdfasdf asdfasdf asdfasdfasdfasdf asdfasdf asdfasdf asdfasdfasdfasdf asdfasdf asdfasdf asdfasdfasdfasdf asdfasdf asdfasdf asdfasdfasdfasdf asdfasdf asdfasdf asdfasdfasdfasdf asdfasdf asdfasdf asdfasdfasdfasdf asdfasdf asdfasdf asdfasdfasdfasdf asdfasdf asdfasdf asdfasdf
+
+
+
+      .col-xs-3.profile-actions
+        // .btn.btn-primary Edit Profile <-- show if player view
+
+        // below if recruiter view
+        .btn.btn-primary Manage
+
+        // below if recruiter view
+        .rating
+          %span 94
+          &frasl; 100

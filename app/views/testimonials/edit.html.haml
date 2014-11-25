@@ -1,0 +1,10 @@
+.container
+  %br
+  %br
+  .row
+    .col-xs-12
+      %h1 Leave a testimonial for #{@testimonial.team.player_profile.user.name}
+      %br
+      = simple_form_for @testimonial, url: testimonial_path(@testimonial.sid) do |f|
+        = f.input :body, required: false, label: false, input_html: {rows: 10}, placeholder: 'Write your reference here'
+        = f.submit 'Submit reference', class: 'btn btn-primary'

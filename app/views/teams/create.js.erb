@@ -1,0 +1,5 @@
+<% unless @team.errors.any? %>
+$("#teams").prepend("<%= escape_javascript(render @team) %>");
+$('#teamModal').find('input:not([type=submit])').val('');
+$('#teamModal').modal('hide');
+<% end %>

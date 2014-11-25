@@ -1,0 +1,137 @@
+.user-registration
+  // --------------------------------------------------------------------------------------------
+  // common
+  // --------------------------------------------------------------------------------------------
+  .subnav
+    background-color: #d0d0d0
+    padding-top: 6px
+    padding-bottom: 6px
+    margin-bottom: 60px
+
+    ul.registration-progress
+      text-align: center
+      list-style-type: none
+      padding: 0 0
+      margin: 0 0
+
+      li.registration-step
+        display: inline-block
+        padding: 13px 30px
+        background-color: #fff
+        color: #bcc2c5
+
+        span.icon
+          margin-right: 7px
+
+        &.current
+          background-color: $theme-color1
+          color: #fff
+
+        &.completed
+          color: $text-color
+          span.icon
+            color: $theme-color1
+
+          a
+            color: #ffffff
+            span.icon
+              color: #ffffff
+
+  
+  h2
+    margin-bottom: 20px
+
+  hr
+    margin-top: 40px
+    margin-bottom: 40px
+
+  .form-actions
+    padding-top: 50px
+
+    a
+      display: block
+
+  .btn
+    // padding: 12px 50px
+    // font-size: 1.4em
+    // display: block
+    margin: 0 auto 30px auto
+    text-transform: uppercase
+
+  .add-team, .add-highlight
+    display: block
+    margin: 10px 10px
+    color: $gray-lighter
+    text-align: center
+    cursor: pointer
+
+    span
+      display: block
+      width: 190px
+      height: 190px
+      margin: 0 auto 20px auto
+      line-height: 190px
+      font-size: 6em
+      border: 4px dashed $gray-lighter
+
+  // --------------------------------------------------------------------------------------------
+  // teams page
+  // --------------------------------------------------------------------------------------------
+  .user-registration-teams
+    .team
+      border: 1px solid $gray-lighter
+      -webkit-border-radius: 3px
+      -moz-border-radius: 3px
+      border-radius: 3px
+      margin: 10px 10px
+      padding: 10px
+      min-height: 215px
+
+      .btn
+        font-size: 1em
+        padding: 3px 20px
+        margin: 0px
+        margin-top: 10px
+
+      .jersey, .information
+        display: inline-block
+
+      .jersey
+        // TODO: add jersey as background image
+        width: 120px
+        height: 176px
+        float: left
+        text-align: center
+        background: image-url('jersey.png')
+        margin-right: 15px
+
+        span
+          font-size: 2.25em
+          font-weight: 700
+          display: block
+          margin-top: 60px
+
+      .information
+        padding: 30px 10px 10px 10px
+        max-width: 230px
+
+        .info
+          span
+            font-weight: 600
+          &:first-child
+            padding-bottom: 4px
+            border-bottom: 1px solid #ccc
+            margin-bottom: 8px
+          &.highlight
+            font-size: 1.2em
+    
+    .remove_nested_fields
+      display: block
+      padding: 10px
+  // --------------------------------------------------------------------------------------------
+  // highlights page
+  // --------------------------------------------------------------------------------------------
+
+
+
+      

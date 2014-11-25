@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  references: MyString
+  player_profile_id: 
+  school_id: 
+
+two:
+  references: MyString
+  player_profile_id: 
+  school_id: 

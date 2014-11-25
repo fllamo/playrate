@@ -1,0 +1,24 @@
+%tr
+  %td= match.player_profile.user.name
+  %td= "#{match.player_profile.city}, #{match.player_profile.state}"
+  %td= match.player_profile.school
+  %td= match.total_score
+  %td= render partial: 'note_books/status', locals: {player_profile: match.player_profile}
+  %td
+    - if Submission.exists?(player_profile: match.player_profile, school: match.position_search.recruiter_profile.school)
+      %span.label.label-success Yes
+    - else
+      %span.label.label-danger No
+  %td{nowrap: true}
+    .pull-right
+      = link_to player_profile_path(match.player_profile), class: 'btn btn-default btn-xs' do
+        .glyphicon.glyphicon-search
+        Profile
+      &nbsp;
+      = link_to dashboard_add_to_dash_path({profile_id: match.player_profile}), class: 'btn btn-success btn-xs' do
+        .glyphicon.glyphicon-plus
+        Save
+      &nbsp;
+      = link_to match, method: :delete, data: {confirm: "You can't undo this action. Do it anyways?"}, class: 'btn btn-danger btn-xs' do
+        .glyphicon.glyphicon-remove
+        Remove

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player_profile_id: 
+  recruiter_profile_id: 
+
+two:
+  player_profile_id: 
+  recruiter_profile_id: 

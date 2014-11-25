@@ -1,0 +1,20 @@
+.col-xs-6
+  .team
+    .jersey
+      %span= team.jersey_number
+    .information
+      .info <b>Team:</b> #{team.name} <i>(#{team.varsity? ? 'Varsity' : 'Junior Varsity'})</i>
+      .info <b>Duration:</b> #{pluralize(team.duration, 'year')}
+
+      .info <b>Coach:</b> #{team.coach}
+      - if team.coach_phone.present?
+        .info <b>Phone:</b> #{team.coach_phone}
+      - if team.coach_email.present?
+        .info <b>Email:</b> #{team.coach_email}
+      
+      - if team.testimonial.present? && team.testimonial.complete? # Done
+        = link_to 'Testimonial Received', '#', class: 'btn btn-default', disabled: true
+      - elsif team.testimonial.present? && !team.testimonial.complete? # Requested, but not done
+        = link_to 'Resend Request', testimonials_path(team_id: team.id), class: 'btn btn-primary', remote: true, method: :post, data: {id: team.id}
+      - elsif team.testimonial.blank? # New
+        = link_to 'Request Testimonial', testimonials_path(team_id: team.id), class: 'btn btn-primary', remote: true, method: :post, data: {id: team.id}

@@ -1,0 +1,38 @@
+= simple_form_for @position_search do |f|
+  #stat_fields
+    .row.search-header
+      .title Position Stats
+      .points-remaining
+        %span.points <span id="used_points">#{100}</span>/100
+        %span.description Points Remaining
+
+
+    .row
+      - @position.stats.each do |ps|
+        = f.simple_fields_for :stat_searches, f.object.stat_searches.where(name: ps).first || StatSearch.new do |ssf|
+          .col-xs-4.search-field
+            = ssf.input :name, as: :hidden, input_html: {value: ps}
+            .allocation-header
+              .points
+                %span= ssf.object.coefficient
+                = ssf.input :coefficient, as: :hidden
+              .title= ps
+              .point-controls
+                %span.glyphicon.glyphicon-minus
+                %span.glyphicon.glyphicon-plus
+            = ssf.simple_fields_for :tiers, Tier.new do |tf|
+              = tf.input :importance, as: :hidden, input_html: {value: 1}
+              .allocation-form
+                .title T1
+                = tf.input :start_value, label: false, placeholder: 'Min value', input_html: {min: 0}
+            = ssf.simple_fields_for :tiers, Tier.new do |tf|
+              = tf.input :importance, as: :hidden, input_html: {value: 2}
+              .allocation-form
+                .title T2
+                = tf.input :start_value, label: false, placeholder: 'Min value', input_html: {min: 0}
+            = ssf.simple_fields_for :tiers, Tier.new do |tf|
+              = tf.input :importance, as: :hidden, input_html: {value: 3}
+              .allocation-form
+                .title T3
+                = tf.input :start_value, label: false, placeholder: 'Min value', input_html: {min: 0}
+            

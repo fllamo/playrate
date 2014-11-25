@@ -1,0 +1,14 @@
+.container.user-registration
+  = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .row.form-inputs
+      .col-xs-6.col-xs-offset-3
+        %br
+        %br
+        %br
+        %h2 Sign in
+        = f.input :email, required: false, autofocus: true
+        = f.input :password, required: false
+        = f.input :remember_me, as: :hidden, input_html: {value: 1} if devise_mapping.rememberable?
+    .form-actions
+      = f.button :submit, "Sign in", class: 'btn btn-primary'
+      = render "devise/shared/links"

@@ -1,0 +1,23 @@
+.container
+  %br
+  %br
+  .row
+    .col-xs-12
+      .list-group
+        .panel.panel-default
+          .panel-heading Messages
+          - if @conversations.any?{|c| c.meaty?}
+            .list-group
+              - @conversations.includes(:messages).each do |conversation|
+                / TODO: DRY this up
+                - if current_user.is_player?
+                  - other = conversation.recruiter_profile
+                - elsif current_user.is_recruiter?
+                  - other = conversation.player_profile
+                - if conversation.meaty?
+                  = link_to show_conversations_path(profile: other.to_param), class: 'list-group-item' do
+                    %h4.list-group-item-heading= other.user.name
+                    %p.list-group-item-text= truncate(conversation.messages.order(:created_at).last.body, omission: '...', length: 250)
+          - else
+            .panel-body
+              %p You haven't received any messages yet.

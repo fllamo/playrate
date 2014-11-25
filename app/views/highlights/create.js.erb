@@ -1,0 +1,5 @@
+<% unless @highlight.errors.any? %>
+$(".highlight-videos").prepend("<%= escape_javascript(render @highlight) %>");
+$('#highlightModal').find('input:not([type=submit])').val('');
+$('#highlightModal').modal('hide');
+<% end %>

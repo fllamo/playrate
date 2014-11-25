@@ -1,0 +1,75 @@
+.container.user-profile-about
+  %br
+  %br
+  - if current_user.is_recruiter?
+    .row
+      .col-xs-6
+        .panel.panel-default
+          .panel-heading Notes
+          .panel-body
+            - if @recruiter_notes.present?
+              = @recruiter_notes
+            - else
+              No Notes. #{link_to 'Create one', player_profile_note_book_edit_path(@player_profile)}.
+      .col-xs-6
+        .panel.panel-default
+          .panel-heading Recommendations
+          .panel-body
+            - if @player_profile.testimonials.any?
+              - @player_profile.testimonials.each_with_index do |testimonial, index|
+                %p= testimonial.body
+                %b= testimonial.team.coach
+                - unless index == @player_profile.testimonials.size - 1
+                  %hr
+            - else
+              No recommendations yet.
+      .col-xs-6
+  .row.player-list
+    .col-xs-6
+      .panel.panel-default
+        .panel-heading Scheduled Games
+        .panel-body
+          - if @player_profile.games.any?
+            - @player_profile.games.each_with_index do |game, index|
+              .game
+                %span.icon.glyphicon.glyphicon-calendar
+                %span= game.name
+                \:
+                %span.details #{game.when} @ #{game.location}
+                - unless index == @player_profile.games.size - 1
+                  %hr
+          - else
+            No games listed yet!
+    .col-xs-6
+      .panel.panel-default
+        .panel-heading Player Awards
+        .panel-body
+          - if @player_profile.awards.any?
+            - @player_profile.awards.each_with_index do |award, index|
+              .award
+                %span.icon.glyphicon.glyphicon-star-empty
+                %span= award.name
+                - unless index == @player_profile.awards.size - 1
+                  %hr
+          - else
+            .award No awards listed yet!
+
+  .row
+    .col-xs-12
+      .player-teams
+        .panel.panel-default
+          .panel-heading Teams
+          .panel-body
+            - @player_profile.teams.each do |team|
+              .col-xs-6
+                .team
+                  .jersey
+                    %span= team.jersey_number
+                  .information
+                    .info <b>Team:</b> #{team.name} <i>(#{team.varsity? ? 'Varsity' : 'Junior Varsity'})</i>
+                    .info <b>Duration:</b> #{pluralize(team.duration, 'year')}
+                    .info <b>Coach:</b> #{team.coach}
+                    - if team.coach_phone.present?
+                      .info <b>Phone:</b> #{team.coach_phone}
+                    - if team.coach_email.present?
+                      .info <b>Email:</b> #{team.coach_email}
