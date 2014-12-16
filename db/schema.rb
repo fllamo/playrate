@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014194047) do
+ActiveRecord::Schema.define(version: 20141216150915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,6 +196,14 @@ ActiveRecord::Schema.define(version: 20141014194047) do
     t.boolean  "image_uploaded"
     t.text     "contacts"
   end
+
+  create_table "schools_sports", force: true do |t|
+    t.integer "school_id"
+    t.integer "sport_id"
+  end
+
+  add_index "schools_sports", ["school_id"], name: "index_schools_sports_on_school_id", using: :btree
+  add_index "schools_sports", ["sport_id"], name: "index_schools_sports_on_sport_id", using: :btree
 
   create_table "sports", force: true do |t|
     t.string   "name"

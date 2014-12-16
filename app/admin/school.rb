@@ -40,6 +40,7 @@ ActiveAdmin.register School do
       f.input :avg_gpa
       f.input :enrollement_size
       f.input :contacts
+      f.input :sports
       f.actions
     end
   end
@@ -55,7 +56,7 @@ ActiveAdmin.register School do
   end
 
   collection_action :import_csv, :method => :post do
-    CsvDb.convert_save("school", params[:dump][:file])
+    School.csv_to_db(params[:dump][:file])
     redirect_to :action => :index, :notice => "CSV imported successfully!"
   end
 

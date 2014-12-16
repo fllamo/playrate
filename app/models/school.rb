@@ -2,6 +2,7 @@ class School < ActiveRecord::Base
   has_many :recruiter_profiles
   has_many :position_searches, through: :recruiter_profiles
   has_many :submissions
+  has_and_belongs_to_many :sports
 
   validates :name, presence: true
   validates :state, presence: true
@@ -58,5 +59,29 @@ class School < ActiveRecord::Base
 
   def self.GPA_scores
     (1..4).step(0.1).to_a.map{|f| f.round(1)}.reverse
+  end
+
+  def self.csv_to_db(csv_data)
+    csv_file = csv_data.read
+    CSV.parse(csv_file, {headers: true}) do |row|
+      school = School.where(id: row['Id']).first_or_initialize
+      School.column_names.each do |key|
+        unless key == "id" || key == "created_at" || key == 'updated_at'
+          value = row[key.humanize]
+          school.send "#{key}=", value
+        end
+      end
+      if school.save
+        # We could optimize this by caching the sport_name's id in a hash
+        if row['Sports']
+          row['Sports'].split(',').each do |sport_name|
+            sport = Sport.find_by_name(sport_name.strip)
+            if sport
+              school.sports << sport
+            end
+          end
+        end
+      end
+    end
   end
 end
