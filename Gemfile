@@ -13,7 +13,7 @@ group :production, :staging do
   gem 'rack-cache', :require => 'rack/cache'
 end
 
-gem 'rails', '~> 4.0'
+gem 'rails'
 gem 'dalli'
 gem 'exception_notification'
 
@@ -34,7 +34,7 @@ gem 'activeadmin', github: 'activeadmin'
 
 # Authentication & permissions
 gem 'devise'
-gem 'cancancan', '~> 1.9'
+gem 'cancancan'
 
 # Templating
 gem 'haml-rails'
@@ -57,10 +57,10 @@ gem 'obfuscate_id', :git => 'https://github.com/namick/obfuscate_id.git'
 
 # Javascript/CSS
 gem 'jquery-rails'
-gem 'sass-rails','>= 4.0.0'
-gem 'coffee-rails','>= 4.0.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'bootstrap-sass', '~> 3.2.0.1'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'bootstrap-sass'
 gem 'momentjs-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'autoprefixer-rails'

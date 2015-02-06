@@ -1,0 +1,13 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: playrate_development
+  pool: 5
+  username: root
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: playrate_test
+  pool: 5
+  username: root
